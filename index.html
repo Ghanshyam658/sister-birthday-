@@ -1,0 +1,1163 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Didi ❤️</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           GLOBAL STYLES & CSS VARIABLES
+        ======================================== */
+        :root {
+            /* Dynamic gradient colors that will change via JavaScript */
+            --gradient-1: #FFB6C1;
+            --gradient-2: #FFD700;
+            --gradient-3: #E6E6FA;
+            
+            /* Static theme colors */
+            --rose-gold: #B76E79;
+            --champagne: #F7E7CE;
+            --lavender: #E6E6FA;
+            --peach: #FFDAB9;
+            --teal: #5F9EA0;
+            --white: #FFFFFF;
+            --dark: #2C2C2C;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            transition: background 2s ease;
+        }
+        
+        /* Smooth gradient transition animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* ========================================
+           CUSTOM CURSOR GLOW (Desktop Only)
+        ======================================== */
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.8), transparent);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s;
+            opacity: 0;
+        }
+        
+        @media (hover: hover) {
+            .cursor-glow {
+                opacity: 1;
+            }
+        }
+        
+        /* ========================================
+           FLOATING PARTICLES CANVAS
+        ======================================== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        
+        /* ========================================
+           SECTION: HERO / LANDING
+        ======================================== */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards;
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--champagne);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--white);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        /* ========================================
+           SECTION COMMON STYLES
+        ======================================== */
+        section {
+            position: relative;
+            padding: 5rem 2rem;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--white);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Fade-in on scroll animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ========================================
+           SECTION: MEMORY LANE
+        ======================================== */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .memory-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(255, 182, 193, 0.4);
+        }
+        
+        .memory-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .memory-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+.memory-card:nth-child(4) .memory-image {
+    object-position: top center;
+}
+        .memory-card:hover .memory-image {
+            transform: scale(1.1);
+        }
+        
+        .memory-caption {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+        
+        .memory-text {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .memory-year {
+            font-size: 0.875rem;
+            color: var(--rose-gold);
+            font-weight: 300;
+        }
+        
+        /* ========================================
+           SECTION: EMOTIONAL BUTTON
+        ======================================== */
+        .emotional-button-section {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+        
+        .emotional-btn {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .emotional-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
+        }
+        
+        /* Emotional Overlay */
+        .emotional-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .emotional-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .emotional-message-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5);
+        }
+        
+        .emotional-message-text {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--dark);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .close-overlay-btn {
+            background: var(--rose-gold);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .close-overlay-btn:hover {
+            background: #A05566;
+            transform: scale(1.05);
+        }
+        
+        /* ========================================
+           SECTION: AUDIO MEMORY
+        ======================================== */
+        .audio-section {
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+        
+        .audio-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 30px;
+            max-width: 600px;
+            margin: 2rem auto;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .audio-controls {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .audio-player {
+            width: 100%;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .play-pause-btn {
+            margin-top: 1.5rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #5F9EA0, #4682B4);
+            color: var(--white);
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(95, 158, 160, 0.4);
+        }
+        
+        .play-pause-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(95, 158, 160, 0.6);
+        }
+        
+        /* Audio visualizer - pulsing heart */
+        .audio-visualizer {
+            margin-top: 2rem;
+            font-size: 3rem;
+            animation: heartPulse 1s ease infinite;
+        }
+        
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* ========================================
+           SECTION: LETTER MESSAGE
+        ======================================== */
+        .letter-section {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .letter-container {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 30px;
+            max-width: 800px;
+            margin: 2rem auto;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .letter-text {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--white);
+            text-align: left;
+            margin-bottom: 1rem;
+            opacity: 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .letter-text.typing {
+            opacity: 1;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* ========================================
+           SECTION: SURPRISE / EASTER EGG
+        ======================================== */
+        .surprise-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .surprise-btn {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .surprise-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .surprise-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .surprise-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+        }
+        
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .surprise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .surprise-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .surprise-message-box {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.95), rgba(255, 215, 0, 0.95));
+            padding: 4rem 3rem;
+            border-radius: 30px;
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(255, 182, 193, 0.6);
+            animation: popIn 0.5s ease;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .surprise-final-message {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--white);
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ========================================
+           FOOTER
+        ======================================== */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-text {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .share-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .memory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .emotional-message-box,
+            .surprise-message-box {
+                padding: 2rem;
+            }
+            
+            .letter-container,
+            .audio-container {
+                padding: 2rem;
+            }
+            
+            .letter-text {
+                font-size: 1rem;
+            }
+            
+            .surprise-final-message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor Glow (Desktop Only) -->
+    <div class="cursor-glow"></div>
+    
+    <!-- Floating Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+    
+    <!-- Confetti Canvas for Surprise -->
+    <canvas id="confetti-canvas"></canvas>
+    
+    <!-- ========================================
+         SECTION: HERO / LANDING
+    ======================================== -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Happy Birthday</h1>
+            <p class="hero-subtitle">Pooja</p>
+        </div>
+        
+        <div class="scroll-indicator" onclick="document.querySelector('.memory-section').scrollIntoView({behavior: 'smooth'})">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SECTION: MEMORY LANE
+    ======================================== -->
+    <section class="memory-section fade-in-section">
+        <div class="container">
+            <h2 class="section-title">Our Most Beautiful Memories</h2>
+            
+            <div class="memory-grid">
+                <!-- MEMORY CARD 1 -->
+                <!-- CUSTOMIZATION: Replace image URL and update caption/year -->
+                <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="images/beach.jpeg" alt="Didi and me at beach 2023" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Our beach adventure together</p>
+                        <p class="memory-year">2024</p>
+                    </div>
+                </div>
+                
+                <!-- MEMORY CARD 2 -->
+                <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="images/childhood.jpeg" alt="Childhood memories playing in garden" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Childhood days</p>
+                        <p class="memory-year">2017</p>
+                    </div>
+                </div>
+                
+                <!-- MEMORY CARD 3 -->
+                <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="images/bhaidooj.jpeg" alt="Didi's graduation day" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">bhaidooj</p>
+                        <p class="memory-year">2021</p>
+                    </div>
+                </div>
+                
+                <!-- MEMORY CARD 4 -->
+                <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="images/diwali.jpeg" alt="Family vacation mountains" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Diwali lights and laughter</p>
+                        <p class="memory-year">2025</p>
+                    </div>
+                </div>
+                
+                <!-- MEMORY CARD 5 -->
+                <!-- <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="images/diwali.jpeg" alt="Diwali celebration together" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text"></p>
+                        <p class="memory-year">2025</p>
+                    </div>
+                </div> -->
+                
+                <!-- MEMORY CARD 6 -->
+                <!-- <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="https://picsum.photos/400/300?random=6" alt="Sister's birthday party last year" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Your 29th birthday celebration</p>
+                        <p class="memory-year">2025</p>
+                    </div>
+                </div> -->
+                
+                <!-- MEMORY CARD 7 -->
+                <!-- <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="https://picsum.photos/400/300?random=7" alt="Road trip singing together" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Road trip karaoke sessions</p>
+                        <p class="memory-year">2021</p>
+                    </div>
+                </div> -->
+                
+                <!-- MEMORY CARD 8 -->
+                <!-- <div class="memory-card">
+                    <div class="memory-image-container">
+                        <img src="https://picsum.photos/400/300?random=8" alt="Cooking together in kitchen" class="memory-image">
+                    </div>
+                    <div class="memory-caption">
+                        <p class="memory-text">Late night cooking adventures</p>
+                        <p class="memory-year">2024</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SECTION: EMOTIONAL BUTTON
+    ======================================== -->
+    <section class="emotional-button-section fade-in-section">
+        <button class="emotional-btn" onclick="showEmotionalMessage()">
+            Begin the Moment ✨
+        </button>
+    </section>
+    
+    <!-- Emotional Overlay -->
+    <div class="emotional-overlay" id="emotionalOverlay">
+        <div class="emotional-message-box">
+            <p class="emotional-message-text" id="emotionalMessageText"></p>
+            <button class="close-overlay-btn" onclick="closeEmotionalOverlay()">Close</button>
+        </div>
+    </div>
+    
+    <!-- ========================================
+         SECTION: AUDIO MEMORY
+    ======================================== -->
+    <section class="audio-section fade-in-section">
+        <div class="container">
+            <h2 class="section-title">Our Song – Play & Feel the Love</h2>
+            
+            <div class="audio-container">
+                <!-- CUSTOMIZATION: Replace audio source with your actual song file -->
+                <audio id="audioPlayer" class="audio-player" controls>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                
+                <button class="play-pause-btn" onclick="toggleAudio()">▶️ Play Our Song</button>
+                
+                <div class="audio-visualizer">❤️</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SECTION: LETTER MESSAGE
+    ======================================== -->
+    <section class="letter-section fade-in-section">
+        <div class="container">
+            <h2 class="section-title">A Letter From Your Little Brother</h2>
+            
+            <div class="letter-container">
+                <!-- CUSTOMIZATION: Edit these paragraphs with your personal message -->
+                <p class="letter-text" data-delay="0">Dear Didi,</p>
+                <p class="letter-text" data-delay="800">Some bonds are given, but ours was never just given—it was built, shaped, and quietly understood in ways words often fail to explain. You are not just a part of my life, you are something my life grew around. And today, I just want to pause and acknowledge that.</p>
+                <p class="letter-text" data-delay="1600">Some bonds are given, but ours was never just given—it was built, shaped, and quietly understood in ways words often fail to explain. You are not just a part of my life, you are something my life grew around. And today, I just want to pause and acknowledge that.</p>
+                <p class="letter-text" data-delay="2400">You’ve been strength in moments where I didn’t even realize I needed it. Not loud, not obvious—but present in a way that stays longer than anything else. And maybe that’s what makes you different.</p>
+                <p class="letter-text" data-delay="3200">You’ve been strength in moments where I didn’t even realize I needed it. Not loud, not obvious—but present in a way that stays longer than anything else. And maybe that’s what makes you different.</p>
+                <p class="letter-text" data-delay="4000">There are things I may never say out loud, but they exist. In the way I trust you, in the way I think of you, in the way I know you’ll always matter. Some bonds don’t need to be proven—they just remain.</p>
+                <p class="letter-text" data-delay="4800">I don’t know what this year will bring for you, but I know one thing. Whatever comes, you’ll face it in your own way, and that way has always been enough. You don’t need to become more—you just need to continue being.</p>
+                <p class="letter-text" data-delay="5600">So today isn’t just about celebrating your birthday. It’s about acknowledging your existence in my life, and how quietly important that has always been. Happy Birthday, my sister—stay as you are, because that’s already something rare.</p>
+                <p class="letter-text" data-delay="6400">Forever your little brother,<br>Ghanshyam ❤️</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         SECTION: SURPRISE / EASTER EGG
+    ======================================== -->
+    <section class="surprise-section fade-in-section">
+        <button class="surprise-btn" onclick="triggerSurprise()">
+            One last surprise for my Didi ✨
+        </button>
+    </section>
+    
+    <!-- Surprise Overlay -->
+    <div class="surprise-overlay" id="surpriseOverlay">
+        <div class="surprise-message-box">
+            <p class="surprise-final-message">
+                I thought of sending just a ‘Happy Birthday’…
+but that didn’t feel enough for someone like you.
+So here’s something better — a small reminder that your existence has always meant more than you realize.
+Happy Birthday ✨”
+            </p>
+        </div>
+    </div>
+    
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+    <footer>
+        <!-- CUSTOMIZATION: Change "Ghanshyam" to your name -->
+        <p class="footer-text">Made with endless love by your little brother — Ghanshyam ❤️</p>
+        <p class="footer-date">3rd April 2026</p>
+    </footer>
+    
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+    <script>
+        // ==========================================
+        // DYNAMIC GRADIENT BACKGROUND CHANGER
+        // ==========================================
+        const gradients = [
+            ['#FFB6C1', '#FFD700', '#E6E6FA'],  // Rose gold, champagne, lavender
+            ['#FFDAB9', '#FFB6C1', '#F7E7CE'],  // Peach, rose, champagne
+            ['#E6E6FA', '#5F9EA0', '#FFD700'],  // Lavender, teal, gold
+            ['#FFB6C1', '#FFDAB9', '#E6E6FA'],  // Rose, peach, lavender
+            ['#F7E7CE', '#FFD700', '#FFB6C1'],  // Champagne, gold, rose
+            ['#5F9EA0', '#E6E6FA', '#FFDAB9']   // Teal, lavender, peach
+        ];
+        
+        let currentGradientIndex = 0;
+        
+        function changeGradient() {
+            currentGradientIndex = (currentGradientIndex + 1) % gradients.length;
+            const [color1, color2, color3] = gradients[currentGradientIndex];
+            
+            document.documentElement.style.setProperty('--gradient-1', color1);
+            document.documentElement.style.setProperty('--gradient-2', color2);
+            document.documentElement.style.setProperty('--gradient-3', color3);
+        }
+        
+        // Change gradient every 5 seconds
+        setInterval(changeGradient, 5000);
+        
+        // ==========================================
+        // CUSTOM CURSOR GLOW
+        // ==========================================
+        const cursorGlow = document.querySelector('.cursor-glow');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+        
+        // ==========================================
+        // FLOATING PARTICLES ANIMATION
+        // ==========================================
+        const particlesCanvas = document.getElementById('particles-canvas');
+        const particlesCtx = particlesCanvas.getContext('2d');
+        
+        particlesCanvas.width = window.innerWidth;
+        particlesCanvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            particlesCanvas.width = window.innerWidth;
+            particlesCanvas.height = window.innerHeight;
+        });
+        
+        const particles = [];
+        const particleCount = 50;
+        
+        // Particle shapes: hearts and sparkles
+        const shapes = ['❤️', '💖', '⭐','🌸','💫'];
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * particlesCanvas.width;
+                this.y = Math.random() * particlesCanvas.height;
+                this.size = Math.random() * 20 + 10;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > particlesCanvas.width) this.x = 0;
+                if (this.x < 0) this.x = particlesCanvas.width;
+                if (this.y > particlesCanvas.height) this.y = 0;
+                if (this.y < 0) this.y = particlesCanvas.height;
+            }
+            
+            draw() {
+                particlesCtx.font = this.size + 'px Arial';
+                particlesCtx.fillText(this.shape, this.x, this.y);
+            }
+        }
+        
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+        
+        function animateParticles() {
+            particlesCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+        
+        // ==========================================
+        // FADE IN ON SCROLL (Intersection Observer)
+        // ==========================================
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger letter typing animation when letter section is visible
+                    if (entry.target.classList.contains('letter-section')) {
+                        startLetterTyping();
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // ==========================================
+        // EMOTIONAL BUTTON OVERLAY
+        // ==========================================
+        function showEmotionalMessage() {
+            const overlay = document.getElementById('emotionalOverlay');
+            const messageText = document.getElementById('emotionalMessageText');
+            
+            // CUSTOMIZATION: Edit this emotional message
+            const message = "You were my first friend, my constant support, and the one who believed in me even when I didn’t believe in myself No matter how far we are, you’re the part of my life that never changes. Happy 30th Birthday… I’m proud to be your brother ❤️";
+            
+            overlay.classList.add('active');
+            
+            // Typewriter effect
+            let index = 0;
+            messageText.textContent = '';
+            
+            function typeWriter() {
+                if (index < message.length) {
+                    messageText.textContent += message.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 30);
+                }
+            }
+            
+            typeWriter();
+        }
+        
+        function closeEmotionalOverlay() {
+            document.getElementById('emotionalOverlay').classList.remove('active');
+        }
+        
+        // ==========================================
+        // AUDIO PLAYER CONTROLS
+        // ==========================================
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playPauseBtn = document.querySelector('.play-pause-btn');
+        
+        function toggleAudio() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.textContent = '⏸️ Pause';
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '▶️ Play Our Song';
+            }
+        }
+        
+        // Update button when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            playPauseBtn.textContent = '▶️ Play Our Song';
+        });
+        
+        // ==========================================
+        // LETTER TYPING ANIMATION
+        // ==========================================
+        let letterTypingStarted = false;
+        
+        function startLetterTyping() {
+            if (letterTypingStarted) return;
+            letterTypingStarted = true;
+            
+            const letterTexts = document.querySelectorAll('.letter-text');
+            
+            letterTexts.forEach((text, index) => {
+                const delay = parseInt(text.getAttribute('data-delay')) || 0;
+                
+                setTimeout(() => {
+                    text.classList.add('typing');
+                }, delay);
+            });
+        }
+        
+        // ==========================================
+        // SURPRISE BUTTON - CONFETTI & MESSAGE
+        // ==========================================
+        function triggerSurprise() {
+            const surpriseOverlay = document.getElementById('surpriseOverlay');
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            
+            // Show overlay
+            surpriseOverlay.classList.add('active');
+            
+            // Show and start confetti
+            confettiCanvas.style.display = 'block';
+            startConfetti();
+            
+            // Hide overlay after 8 seconds
+            setTimeout(() => {
+                surpriseOverlay.classList.remove('active');
+                confettiCanvas.style.display = 'none';
+            }, 8000);
+        }
+        
+        // ==========================================
+        // CONFETTI ANIMATION
+        // ==========================================
+        function startConfetti() {
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            const confettiCtx = confettiCanvas.getContext('2d');
+            
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            const confettiPieces = [];
+            const confettiCount = 150;
+            const colors = ['#FFB6C1', '#FFD700', '#E6E6FA', '#FFDAB9', '#5F9EA0', '#FF69B4'];
+            const shapes = ['❤️', '🌸', '💖', '⭐', '💫','☺️☺️'];
+            
+            class ConfettiPiece {
+                constructor() {
+                    this.x = Math.random() * confettiCanvas.width;
+                    this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
+                    this.size = Math.random() * 25 + 15;
+                    this.speedY = Math.random() * 3 + 2;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+                    this.rotation = Math.random() * 360;
+                    this.rotationSpeed = Math.random() * 5 - 2.5;
+                }
+                
+                update() {
+                    this.y += this.speedY;
+                    this.x += this.speedX;
+                    this.rotation += this.rotationSpeed;
+                    
+                    if (this.y > confettiCanvas.height) {
+                        this.y = -50;
+                        this.x = Math.random() * confettiCanvas.width;
+                    }
+                }
+                
+                draw() {
+                    confettiCtx.save();
+                    confettiCtx.translate(this.x, this.y);
+                    confettiCtx.rotate(this.rotation * Math.PI / 180);
+                    confettiCtx.font = this.size + 'px Arial';
+                    confettiCtx.fillText(this.shape, 0, 0);
+                    confettiCtx.restore();
+                }
+            }
+            
+            for (let i = 0; i < confettiCount; i++) {
+                confettiPieces.push(new ConfettiPiece());
+            }
+            
+            let animationId;
+            
+            function animateConfetti() {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                
+                confettiPieces.forEach(piece => {
+                    piece.update();
+                    piece.draw();
+                });
+                
+                animationId = requestAnimationFrame(animateConfetti);
+            }
+            
+            animateConfetti();
+            
+            // Stop confetti after 8 seconds
+            setTimeout(() => {
+                cancelAnimationFrame(animationId);
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            }, 8000);
+        }
+        
+        // ==========================================
+        // SHARE BUTTON - COPY URL TO CLIPBOARD
+        // ==========================================
+        // function shareWebsite() {
+        //     const url = window.location.href;
+            
+        //     navigator.clipboard.writeText(url).then(() => {
+        //         alert('Website link copied to clipboard! 💝 Share it with your sister!');
+        //     }).catch(() => {
+        //         alert('Link: ' + url);
+        //     });
+        // }
+    </script>
+</body>
+</html>
